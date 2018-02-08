@@ -15,3 +15,20 @@ export const selectUserDetail = (user) => {
     }
     
 };
+
+export const SET_WODS = 'SET_WODS';
+
+export function setWods(wods) {
+    return {
+        type: SET_WODS,
+        wods
+    }
+} 
+
+export function fetchGames() {
+    return dispatch => {
+        fetch('/api/wods')
+        .then(res => res.json())
+        .then(data => dispatch(setWods(data.wods)));
+    }
+}

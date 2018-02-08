@@ -23,17 +23,18 @@ if(!!error) {
 }
 });
 
-app.get('/', function(req, resp) {
+app.get('/WodsPage', function(req, resp) {
     //about mysql
     MysqlConnection.query("Select * From crossfittracker.Wod", function(error, rows, fields) {
     if(!!error) {
+        MysqlConnection.release();
         console.log('Error in the query');
     } else {
         //parse fields as needed 
         console.log('successful query');
         console.log(rows[2]);
         console.log(rows[2].WORKOUT_NAME);
-        resp.send('Wod results ' + rows[0].WORKOUT_NAME);
+        resp.json(rows);
     }
 });
 })
